@@ -1,16 +1,25 @@
 package ua.model;
 
-public record Coach(String firstName, String lastName, CoachRole role) {
+import ua.util.ValidationHelper;
+
+public record Coach(String firstName, String lastName, String role) {
+
     public Coach {
-        if (firstName == null || firstName.isBlank())
-            throw new IllegalArgumentException("Ім’я тренера не може бути порожнім");
-        if (lastName == null || lastName.isBlank())
-            throw new IllegalArgumentException("Прізвище тренера не може бути порожнім");
-        if (role == null)
-            throw new IllegalArgumentException("Роль тренера має бути визначена");
+        if (!ValidationHelper.isValidName(firstName) || !ValidationHelper.isValidName(lastName)) {
+            throw new IllegalArgumentException("Неправильне ім'я або прізвище");
+        }
     }
 
-    public static Coach of(String firstName, String lastName, CoachRole role) {
+    public static Coach create(String firstName, String lastName, String role) {
         return new Coach(firstName, lastName, role);
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    @Override
+    public String toString() {
+        return getFullName() + " (" + role + ")";
     }
 }
