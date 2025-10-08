@@ -1,72 +1,21 @@
 package ua.model;
 
-import ua.util.Utils;
-import java.util.Objects;
+import ua.util.ValidationHelper;
 
-public class Player {
-    private String firstName;
-    private String lastName;
-    private PlayerPosition position;
-    private int number;
+public record Player(String firstName, String lastName, String position, int number) {
 
-    public Player(String firstName, String lastName, PlayerPosition position, int number) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setPosition(position);
-        setNumber(number);
+    public Player {
+        if (!ValidationHelper.isValidName(firstName) || !ValidationHelper.isValidName(lastName)) {
+            throw new IllegalArgumentException("Неправильне ім'я або прізвище");
+        }
     }
-   
-    public static Player of(String firstName, String lastName, PlayerPosition position, int number) {
+
+    public static Player create(String firstName, String lastName, String position, int number) {
         return new Player(firstName, lastName, position, number);
-    }
-
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) {
-        if (!Utils.isValidName(firstName)) {
-            throw new IllegalArgumentException("Некоректне ім’я гравця!");
-        }
-        this.firstName = firstName;
-    }
-
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) {
-        if (!Utils.isValidName(lastName)) {
-            throw new IllegalArgumentException("Некоректне прізвище гравця!");
-        }
-        this.lastName = lastName;
-    }
-
-    public PlayerPosition getPosition() { return position; }
-    public void setPosition(PlayerPosition position) {
-        if (position == null) {
-            throw new IllegalArgumentException("Позиція не може бути null!");
-        }
-        this.position = position;
-    }
-
-    public int getNumber() { return number; }
-    public void setNumber(int number) {
-        if (number <= 0) throw new IllegalArgumentException("Номер має бути позитивним!");
-        this.number = number;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s (#%d, %s)", firstName, lastName, number, position);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Player player)) return false;
-        return number == player.number &&
-                Objects.equals(firstName, player.firstName) &&
-                Objects.equals(lastName, player.lastName) &&
-                position == player.position;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, position, number);
+        return firstName + " " + lastName + " (" + position + ", №" + number + ")";
     }
 }
