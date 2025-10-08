@@ -1,7 +1,8 @@
 package ua.util;
 
 class ValidationHelper {
-    static boolean isAlphabetic(String s) {
-        return s != null && s.matches("[A-Za-zА-Яа-яЇїІіЄєҐґ]+");
+
+    static boolean isValidName(String name) {
+        return name != null && name.matches("[A-Za-zА-Яа-яЇїІіЄєҐґ]+");
     }
 }
