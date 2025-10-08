@@ -6,13 +6,13 @@ public enum SportType {
     VOLLEYBALL,
     TENNIS;
 
-    // Опис кожного виду спорту за допомогою switch expression
-    public String description() {
+    public String getDescription() {
+        // Switch expression (Java 14+)
         return switch (this) {
-            case FOOTBALL -> "Грається 11 на 11, основна мета — забити м'яч у ворота.";
-            case BASKETBALL -> "Гра з м'ячем, мета — закинути м'яч у кошик.";
-            case VOLLEYBALL -> "Командна гра, мета — перекинути м'яч через сітку.";
-            case TENNIS -> "Індивідуальна або парна гра ракетками.";
+            case FOOTBALL -> "Футбол — командна гра, 11 гравців.";
+            case BASKETBALL -> "Баскетбол — 5 гравців у команді.";
+            case VOLLEYBALL -> "Волейбол — 6 гравців у команді.";
+            case TENNIS -> "Теніс — індивідуальна або парна гра.";
         };
     }
 }
