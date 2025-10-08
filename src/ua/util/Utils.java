@@ -1,7 +1,10 @@
 package ua.util;
 
+import ua.model.Player;
+
 public class Utils {
-    public static boolean isValidName(String s) {
-        return ValidationHelper.isAlphabetic(s);
+
+    public static void printPlayerInfo(Player player) {
+        System.out.println("Інформація про гравця: " + player);
     }
 }
