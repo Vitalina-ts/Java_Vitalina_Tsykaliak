@@ -16,14 +16,18 @@ public class Product {
             LoggerUtil.logSevere("Помилка створення Product: відʼємна ціна");
             throw new InvalidDataException("Ціна не може бути відʼємною!");
         }
-
         this.name = name;
         this.price = price;
         LoggerUtil.logInfo("Створено об’єкт Product: " + name);
     }
 
-    public String getName() { return name; }
-    public double getPrice() { return price; }
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 
     @Override
     public String toString() {
